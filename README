@@ -1,0 +1,30 @@
+Description:
+===========
+
+Turing machine implementation. Libturing simulates the Turing machine using Lex/Yacc.
+Tested on OS X 10.9.5 and Debian 7.8 (wheezy).
+
+Grammar:
+========
+
+An input file has an header and a serie of rules. The first four lines of the file are the header, the following
+ lines are the rules.
+The lines starting with the '!' character are ignored (comments) and the same happens for lines containing only spaces or tabs and the empty lines in which the only character present is the new line. 
+So valid lines for the header are the first four that don't fall in those cases..
+The first line of the header describe the initial status of the "tape".
+The second line, the initial position of the reading head.
+The third line, the initial state.
+The fourth line, the final state that sould be reached.
+Starting fron the fifth line, the rules in the format:
+
+<index> <input_value> <output_value> <direction> <new_state>
+
+The space symbol is '-' char. 
+The '~' character is the "jolly" character and match with any character.
+
+
+Notes:
+======
+
+See in the "test" directory for an example (both input file and program).
+
