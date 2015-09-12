@@ -1,7 +1,7 @@
 Description:
 ===========
 
-Turing machine implementation. Libturing simulates the Turing machine using Lex/Yacc.
+Turing machine implementation. Libturing is a C library that simulate the Turing machine using Lex/Yacc to parse the configuration from a text file.
 Tested on OS X 10.9.5 and Debian 7.8 (wheezy).
 
 Grammar:
