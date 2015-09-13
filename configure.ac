@@ -37,7 +37,7 @@ AC_TYPE_SIZE_T
 
 AC_CANONICAL_HOST
 case $host_os in
-  darwin* )
+  darwin*)
 	      # -D__DEBUG__TURING__ Will enable verbose trace
 	      if test "x$_DEBUG_MEM_" = xyes; then
 			OPTIMIZATION=" -O0 -g "

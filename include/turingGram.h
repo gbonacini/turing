@@ -64,14 +64,14 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 42 "/Users/bg/_Sorgenti/_Turing/_Turing_LY_hg/src/turingGram.y"
+#line 42 "/Users/bg/_Sorgenti/_Turing/_Turing_LY_git/turing/src/turingGram.y"
 {
         long int number;
         char *string;
 	instructions transition;
 }
 /* Line 1529 of yacc.c.  */
-#line 75 "/Users/bg/_Sorgenti/_Turing/_Turing_LY_hg/src/../include/turingGram.h"
+#line 75 "/Users/bg/_Sorgenti/_Turing/_Turing_LY_git/turing/src/../include/turingGram.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
