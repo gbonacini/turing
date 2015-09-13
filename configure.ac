@@ -28,55 +28,46 @@ AC_PROG_LN_S
 AC_PROG_YACC
 AC_PROG_LEX
 
-# To check
-
 # Checks for header files.
 AC_HEADER_STDC
-# This could be useless
-AC_CHECK_HEADERS([stdio.h])
-
-# End To check
 
 # Checks for typedefs, structures, and compiler characteristics.
-#AC_HEADER_STDBOOL
 AC_C_CONST
 AC_TYPE_SIZE_T
-#AC_C_VOLATILE
 
 AC_CANONICAL_HOST
 case $host_os in
   darwin* )
 	      # -D__DEBUG__TURING__ Will enable verbose trace
-	      OPTIMIZATION=-O3
 	      if test "x$_DEBUG_MEM_" = xyes; then
-			OPTIMIZATION=-O0
+			OPTIMIZATION=" -O0 -g "
+              else
+                        OPTIMIZATION=" -D_FORTIFY_SOURCE=2 -O3 -fstack-protector --param=ssp-buffer-size=4 "
               fi
 	      if test "x$CC" = xgcc; then
-		    CFLAGS=" -g -Wextra -Wall  -std=c99 \
-			     -D__DEBUG__TURING__ -D_FORTIFY_SOURCE=2 ${OPTIMIZATION} -fstack-protector \
-                             --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
+		    CFLAGS=" -Wextra -Wall -Wformat -Werror=format-security -std=c99 \
+			     -D__DEBUG__TURING__  ${OPTIMIZATION} "
               else
-                    CFLAGS=" -O3 -g -Wall "
+                    CFLAGS=" -O0 -g -Wall "
               fi
 
         ;;
   linux*)
 	      # -D__DEBUG__TURING__ Will enable verbose trace
-	      OPTIMIZATION=-O3
-	      if test "x$_DEBUG_MEM" = xyes; then
-			OPTIMIZATION=-O0
+	      OPTIMIZATION=" -O3 -D_FORTIFY_SOURCE=2  -fstack-protector --param=ssp-buffer-size=4 "
+	      if test "x$_DEBUG_MEM_" = xyes; then
+			OPTIMIZATION=" -O0 -g "
               fi
 	      if test "x$CC" = xgcc; then
-                    CFLAGS=" -g -Wextra -Wall  -std=c99 -D_XOPEN_SOURCE\
-			     -D__DEBUG__TURING__ -D_FORTIFY_SOURCE=2 ${OPTIMIZATION} -fstack-protector \
-                             --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
-                    LDFLAGS="$LDFLAGS -Wl,-z,relro"
+                    CFLAGS=" -Wextra -Wall -Wformat -Werror=format-security \
+			     -std=c99 -D_XOPEN_SOURCE\
+			     -D__DEBUG__TURING__  ${OPTIMIZATION} "
+                    LDFLAGS=" $LDFLAGS -Wl,-z,relro "
               else
-                    CFLAGS=" -O3 -g -Wall "
+                    CFLAGS=" -O0 -g -Wall "
               fi
         ;;
     *)
-            #CFLAGS=" -O3 -g -Wall "
             AC_MSG_ERROR([Your platform is not currently supported])
         ;;
 esac
