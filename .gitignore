@@ -9,3 +9,11 @@ src/Makefile
 test/.deps/
 test/Makefile
 *swp
+src/.libs/
+src/libturing.la
+src/parseTuringConfig.lo
+src/parseTuringConfig.o
+src/turing.lo
+src/turing.o
+src/turingGram.lo
+src/turingGram.o

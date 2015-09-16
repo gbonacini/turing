@@ -40,13 +40,12 @@ case $host_os in
   darwin*)
 	      # -D__DEBUG__TURING__ Will enable verbose trace
 	      if test "x$_DEBUG_MEM_" = xyes; then
-			OPTIMIZATION=" -O0 -g "
+			OPTIMIZATION=" -O0 -g  -Wextra -Wall -Wformat -Werror=format-security "
               else
                         OPTIMIZATION=" -D_FORTIFY_SOURCE=2 -O3 -fstack-protector --param=ssp-buffer-size=4 "
               fi
 	      if test "x$CC" = xgcc; then
-		    CFLAGS=" -Wextra -Wall -Wformat -Werror=format-security -std=c99 \
-			     -D__DEBUG__TURING__  ${OPTIMIZATION} "
+		    CFLAGS=" -std=c99 -D__DEBUG__TURING__  ${OPTIMIZATION} "
               else
                     CFLAGS=" -O0 -g -Wall "
               fi
@@ -56,11 +55,10 @@ case $host_os in
 	      # -D__DEBUG__TURING__ Will enable verbose trace
 	      OPTIMIZATION=" -O3 -D_FORTIFY_SOURCE=2  -fstack-protector --param=ssp-buffer-size=4 "
 	      if test "x$_DEBUG_MEM_" = xyes; then
-			OPTIMIZATION=" -O0 -g "
+			OPTIMIZATION=" -O0 -g -Wextra -Wall -Wformat -Werror=format-security "
               fi
 	      if test "x$CC" = xgcc; then
-                    CFLAGS=" -Wextra -Wall -Wformat -Werror=format-security \
-			     -std=c99 -D_XOPEN_SOURCE\
+                    CFLAGS=" -std=c99 -D_XOPEN_SOURCE\
 			     -D__DEBUG__TURING__  ${OPTIMIZATION} "
                     LDFLAGS=" $LDFLAGS -Wl,-z,relro "
               else
