@@ -4,6 +4,10 @@
 AC_PREREQ(2.61)
 AC_INIT([turing], m4_esyscmd([ tr -d '\n' < version ]))
 
+CXXFLAGS=""
+CFLAGS=""
+CPPFLAGS=""
+
 AC_CONFIG_SRCDIR([src/parseTuringConfig.c])
 AC_CONFIG_SRCDIR([src/turing.l])
 AC_CONFIG_SRCDIR([src/turingGram.y])
