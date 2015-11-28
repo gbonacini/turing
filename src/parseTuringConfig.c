@@ -63,7 +63,7 @@ inline int extendTape(int direction, element **tape, element* cursor){
 					proc->value = SPACE_CHAR;
 					*tape = cursor->prev;
 				}else{
-					ret = DIRECTION_INV;
+					ret = DIR_INVALID_ERR;
 				}
 			break;
 			case DIRECTION_R:
@@ -74,11 +74,11 @@ inline int extendTape(int direction, element **tape, element* cursor){
 					proc->next = NULL;
 					proc->value = SPACE_CHAR;
 				}else{
-					ret = DIRECTION_INV;
+					ret = DIR_INVALID_ERR;
 				}
 			break;
 			default:
-				ret = DIRECTION_ERR;
+				ret = DIR_UNEXIST_ERR;
 				free(newElement);
 		}
 	} else {
@@ -155,7 +155,7 @@ int executeTuring(header *head, element **tape, operation* program[]){
 		switch(currentRule->direction){
 			case DIRECTION_L:
 				if(cursor->prev == NULL){
-					extendTape(DIRECTION_L, tape, cursor);
+					ret = extendTape(DIRECTION_L, tape, cursor);
 					#ifdef  __DEBUG__TURING__
 						fprintf(ERRSTREAM, "Turing execution - Add L\n");
 					#endif
@@ -167,7 +167,7 @@ int executeTuring(header *head, element **tape, operation* program[]){
 			break;
 			case DIRECTION_R:
 				if(cursor->next == NULL){
-					extendTape(DIRECTION_R, tape, cursor);
+					ret = extendTape(DIRECTION_R, tape, cursor);
 					#ifdef  __DEBUG__TURING__
 						fprintf(ERRSTREAM, "Turing execution - Add R\n");
 					#endif

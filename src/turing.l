@@ -79,7 +79,7 @@ char *endptr;
 			yylval.string = strdup(yytext);
 			if(yylval.string == NULL){
 				yyerror(NULL, NULL, NULL, "Can't allocate new memory"); 
-				exit(NO_NOMEM);
+				exit(ALLOC_MEM_ERR);
 			}
 			ret = TAPE;
 			#ifdef __DEBUG__TURING__

@@ -80,7 +80,7 @@ tape: TAPE	{
 				current = (element*)calloc(1, sizeof(element));
 				if(current == NULL){
 					yyerror(NULL, NULL, NULL, "Can't allocate new memory");
-					exit(NO_NOMEM);
+					exit(ALLOC_MEM_ERR);
 				}
 				if(i == 0) *tape = current;
 				current->value = buffer[i];
@@ -140,7 +140,7 @@ statement: RULE OPERATION STATUS SEPARATOR {
 									(last[index])->next = (operation *)calloc(1, sizeof(operation));
 									if((last[index])->next == NULL){
 										yyerror(NULL, NULL, NULL, "Can't allocate new memory");
-										exit(NO_NOMEM);
+										exit(ALLOC_MEM_ERR);
 									}
 
 									last[index] = (last[index])->next;
@@ -151,7 +151,7 @@ statement: RULE OPERATION STATUS SEPARATOR {
 									last[index] = (operation *)calloc(1, sizeof(operation));
 									if(last[index] == NULL){
 										yyerror(NULL, NULL, NULL, "Can't allocate new memory");
-										exit(NO_NOMEM);
+										exit(ALLOC_MEM_ERR);
 									}
 									program[index] = last[index];
 									#ifdef  __DEBUG__TURING__ 

@@ -31,7 +31,7 @@ int main(int argc, char** argv){
     
     if(argc < 2){
 		   fprintf(stderr,"Test file needed!");
-		   exit(1);
+		   exit(INPUT_ERR);
     }
     result = parseTuringConfig(argv[1], &head, &tape, program);
    
@@ -39,7 +39,7 @@ int main(int argc, char** argv){
 	   fprintf(stderr,"Parse status - OK  - Status: %d\n", result);
     }else{
 	   fprintf(stderr,"Parse status - NOK - Err: %d\n", result);
-	   exit(-1);
+	   exit(PARSER_ERR);
     }
    
     result = executeTuring(&head, &tape, program);
@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 	   fprintf(stderr,"Execution status - OK  - Status: %d\n", result);
     }else{
 	   fprintf(stderr,"Execution status - NOK - Err: %d\n", result);
-	   exit(-1);
+	   exit(EXECUTION_ERR);
     }
 
     printTape(tape);

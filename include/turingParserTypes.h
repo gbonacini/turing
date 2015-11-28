@@ -21,21 +21,23 @@
 #include <stdbool.h>
 #include <errno.h>
 
-#define NO_CONFIG_FILE_ERR -1
-#define NO_PARSE_ERR       -2
-#define NO_RULE_MATCH      -3
-#define NO_NOMEM           -4
+#define NO_CONFIG_FILE_ERR 2
+#define NO_PARSE_ERR       3
+#define NO_RULE_MATCH      4
+#define ALLOC_MEM_ERR  	   5
+#define DIR_UNEXIST_ERR    6
+#define DIR_INVALID_ERR    7
+#define INPUT_ERR          8
+#define PARSER_ERR         9
+#define EXECUTION_ERR     10
 
 #define ERRSTREAM stderr
-#define MAXRULEINDEX 1024
 // ### The numer of instruction levels is restricted in the range 0 - 1023 ###
+#define MAXRULEINDEX 1024
 
 #define DIRECTION_L    -1
 #define DIRECTION_R     1
 #define DIRECTION_S     0
-#define DIRECTION_INV  -1
-#define DIRECTION_ERR  -2
-#define ALLOC_MEM_ERR  -3
 
 #define JOLLY_CHAR      '~'
 #define SPACE_CHAR      '-'
