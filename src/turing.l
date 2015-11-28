@@ -51,7 +51,7 @@ char *endptr;
 ^[!].*[\n] {
 	// ### Comment: it's ignored
 }
-^[ \t].*[\n] {
+^[ \t]*[\n] {
 	// ### Blank Line: it's ignored
 }
 ^[\n] {

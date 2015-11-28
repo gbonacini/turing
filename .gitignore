@@ -17,3 +17,5 @@ src/turing.lo
 src/turing.o
 src/turingGram.lo
 src/turingGram.o
+src/turing.c
+src/turingGram.c

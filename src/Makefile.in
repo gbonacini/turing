@@ -337,9 +337,13 @@ top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libturing.la
 libturing_la_SOURCES = turing.l turingGram.y parseTuringConfig.c
 libturing_la_LDFLAGS = -version-info 1:0:0
-include_HEADERS = ../include/turingParserTypes.h ../include/parseTuringConfig.h ../include/tokenDef.h ../include/turingGram.h
-AM_YFLAGS = --defines=$(PWD)/../include/turingGram.h
-all: all-am
+include_HEADERS = ../include/turingParserTypes.h ../include/parseTuringConfig.h ../include/tokenDef.h 
+
+#AM_YFLAGS = --defines=$(PWD)/../include/turingGram.h
+#AM_YFLAGS = -d turingGram.y -o ../include/turingGram.h
+BUILT_SOURCES = turingGram.h
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .l .lo .o .obj .y
@@ -559,13 +563,15 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs:
 	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -597,6 +603,7 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 	-rm -f turing.c
 	-rm -f turingGram.c
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-libLTLIBRARIES clean-libtool clean-local \
@@ -668,7 +675,7 @@ ps-am:
 
 uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES
 
-.MAKE: install-am install-strip
+.MAKE: all check install install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
 	clean-libLTLIBRARIES clean-libtool clean-local cscopelist-am \
@@ -687,8 +694,11 @@ uninstall-am: uninstall-includeHEADERS uninstall-libLTLIBRARIES
 	uninstall-libLTLIBRARIES
 
 
+turingGram.h: turingGram.y Makefile
+	${YACC} -d turingGram.y -o ../include/turingGram.h
+
 clean-local:
-	-rm -rf turing.c turingGram.c 
+	-rm -rf turing.c turingGram.c ../include/turingGram.h
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
